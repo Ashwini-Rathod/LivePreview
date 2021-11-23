@@ -17,7 +17,7 @@ function Home(props) {
           type: "init",
           data: {
               config: {
-                  shouldReload: true,
+                  shouldReload: false,
                   href: window.location.href,
               },
           },
