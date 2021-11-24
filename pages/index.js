@@ -19,9 +19,9 @@ function Home(props) {
       },
       "*"
   );
-  window.addEventListener("message", (e) => {
+  window.addEventListener("message", async (e) => {
     console.log("TEST", e.data.data)
-    fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
+    await fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
     .then((res) => {
       return res.json()
     })
