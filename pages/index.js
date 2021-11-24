@@ -5,7 +5,7 @@ let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blt
 function Home(props) {
   const ref = useRef();
   console.log("Props: ", props)
-  
+
   const handlePostMessage = (e) => {
     console.log("message event",e)
   }
@@ -26,13 +26,15 @@ function Home(props) {
       },
       "*"
   );
-  if(ref.current) {
-    console.log("If")
-    ref.current.addEventListener('message', handlePostMessage)
-    // ref.current.addEventListener('click', (e) => {
-    //   console.log("click event ", e)
-    // })
-  }
+  window.addEventListener('message', handlePostMessage)
+
+  // if(ref.current) {
+  //   console.log("If")
+  //   ref.current.addEventListener('message', handlePostMessage)
+  //   // ref.current.addEventListener('click', (e) => {
+  //   //   console.log("click event ", e)
+  //   // })
+  // }
   }, [])
   return (
     <div ref ={ref}>
