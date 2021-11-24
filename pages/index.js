@@ -26,7 +26,10 @@ function Home(props) {
       },
       "*"
   );
-  window.addEventListener('message', handlePostMessage)
+  window.addEventListener("message", (e) => {
+    console.log("TEST", e)
+  });
+  // window.addEventListener('message', handlePostMessage)
 
   // if(ref.current) {
   //   console.log("If")
