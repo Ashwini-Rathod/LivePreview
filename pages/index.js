@@ -22,7 +22,7 @@ function Home(props) {
     const {data} = e.data
     console.log("DATA", data)
     if(data.hasOwnProperty('hash')){
-      console.log("HERERERERER")
+      console.log("HERERERERER", data['hash'], data['content_type_uid'])
       fetch(`${url}&live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`)
       .then((res) => {
         return res.json()
