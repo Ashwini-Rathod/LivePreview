@@ -23,7 +23,12 @@ function Home(props) {
     console.log("DATA", data)
     if(data.hasOwnProperty('hash')){
       console.log("HERERERERER", data['hash'], data['content_type_uid'])
-      fetch(`${url}&live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`)
+      fetch(`${url}&live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`, {
+        headers: {
+          api_key: process.env.API_KEY,
+          access_token: process.env.DELIVERY_TOKEN
+        }
+      })
       .then((res) => {
         return res.json()
       })
