@@ -20,11 +20,12 @@ function Home(props) {
       "*"
   );
   window.addEventListener("message",(e) => {
-    console.log("TEST", e)
-    console.log("DATA", e.data.data)
-    if(e.data.data.hasOwnProperty('hash')){
-      console.log("HERERERERER")
-    }
+    console.log("EVENT", e)
+    const {data} = e.data
+    console.log("DATA", data)
+    // if(e.data.data.hasOwnProperty('hash')){
+    //   console.log("HERERERERER")
+    // }
     // await fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
     // .then((res) => {
     //   return res.json()
