@@ -4,7 +4,7 @@ let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blt
 let apiUrl = `https://api.contentstack.io/v3/content_types/live_preview/entries/blte2be7187b7e7ee36?`
 
 function Home(props) {
-  //defining states for all the fields in a CT
+  //defining states for all the fields available in a CT
   const [title, setTitle] = useState(props.entry.entry['title'])
   const [singleLine, setSingleLine] = useState(props.entry.entry['single_line'])
   const [multi_line, setMultiLine] = useState(props.entry.entry['multi_line'])
@@ -13,7 +13,7 @@ function Home(props) {
   const [para3, setPara3] = useState(props.entry.entry['paragraph_3'])
 
   useEffect(() => {
-    //initializing live preview
+    //initializing live preview when the page renders for the first time.
     window.parent.postMessage(
       {
           from: "live-preview",
@@ -27,6 +27,7 @@ function Home(props) {
       },
       "*"
   );
+  //listening to post messages for the hash value
   window.addEventListener("message", async (e) => {
     const {data} = e.data
     if(data.hasOwnProperty('hash')){
@@ -77,7 +78,7 @@ function Home(props) {
 }
 
 export const getStaticProps = async (context) => {
-  //make an api call to a particular entry
+  //make an api call to a particular entry with required headers
   const res = await fetch(url, {
     headers: {
       api_key: process.env.API_KEY,
