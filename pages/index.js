@@ -23,9 +23,9 @@ function Home(props) {
     console.log("EVENT", e)
     const {data} = e.data
     console.log("DATA", data)
-    // if(e.data.data.hasOwnProperty('hash')){
-    //   console.log("HERERERERER")
-    // }
+    if(data.hasOwnProperty('hash')){
+      console.log("HERERERERER")
+    }
     // await fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
     // .then((res) => {
     //   return res.json()
@@ -48,7 +48,7 @@ function Home(props) {
   // }
   }, [])
   return (
-    <div ref ={ref}>
+    <div>
       <Head>
         <title>{props.entry.entry['title']}</title>
       </Head>
