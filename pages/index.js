@@ -17,23 +17,23 @@ function Home(props) {
       },
       "*"
   );
-  window.addEventListener("message",(e) => {
+  window.addEventListener("message", (e) => {
     console.log("EVENT", e)
     const {data} = e.data
     console.log("DATA", data)
     if(data.hasOwnProperty('hash')){
       console.log("HERERERERER")
     }
-    // await fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
-    // .then((res) => {
-    //   return res.json()
-    // })
-    // .then((data) => {
-    //   console.log("DATA",data)
-    // })
-    // .catch((err) => {
-    //   console.log("err", err)
-    // })
+    fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      console.log("DATA",data)
+    })
+    .catch((err) => {
+      console.log("err", err)
+    })
   });
   }, [])
   return (
