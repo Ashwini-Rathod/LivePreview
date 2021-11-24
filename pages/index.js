@@ -20,17 +20,18 @@ function Home(props) {
       "*"
   );
   window.addEventListener("message", async (e) => {
-    console.log("TEST", e.data.data)
-    await fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => {
-      console.log("DATA",data)
-    })
-    .catch((err) => {
-      console.log("err", err)
-    })
+    console.log("TEST", e)
+    console.log("DATA", e.data.data)
+    // await fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
+    // .then((res) => {
+    //   return res.json()
+    // })
+    // .then((data) => {
+    //   console.log("DATA",data)
+    // })
+    // .catch((err) => {
+    //   console.log("err", err)
+    // })
   });
   // window.addEventListener('message', handlePostMessage)
 
