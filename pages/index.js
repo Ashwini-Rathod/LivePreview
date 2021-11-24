@@ -1,7 +1,7 @@
 import Head from "next/head";
 import {useEffect, useState} from 'react'
 let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blte2be7187b7e7ee36?environment=${process.env.ENVIRONMENT_NAME}&include_fallback=true`
-let testURL = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blte2be7187b7e7ee36?`
+let testURL = `https://api.contentstack.io/v3/content_types/live_preview/entries/blte2be7187b7e7ee36?`
 
 function Home(props) {
   useEffect(() => {
@@ -24,7 +24,7 @@ function Home(props) {
     console.log("DATA", data)
     if(data.hasOwnProperty('hash')){
       console.log("HERERERERER", data['hash'], data['content_type_uid'])
-      let res = await fetch(`${url}&live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`, {
+      let res = await fetch(`${testURL}live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`, {
         headers: {
           api_key: process.env.API_KEY,
           access_token: process.env.DELIVERY_TOKEN
