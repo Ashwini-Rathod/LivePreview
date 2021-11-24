@@ -1,15 +1,8 @@
 import Head from "next/head";
-import {useEffect, useRef} from 'react'
+import {useEffect, useState} from 'react'
 let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blte2be7187b7e7ee36?environment=${process.env.ENVIRONMENT_NAME}&include_fallback=true`
 
 function Home(props) {
-  const ref = useRef();
-  console.log("Props: ", props)
-
-  const handlePostMessage = (e) => {
-    console.log("message event",e)
-  }
-
   useEffect(() => {
     console.log("ref", ref.current, window)
     
@@ -27,7 +20,17 @@ function Home(props) {
       "*"
   );
   window.addEventListener("message", (e) => {
-    console.log("TEST", e)
+    console.log("TEST", e.data.data)
+    fetch(`${url}&live_preview=${e.data.data['hash']}&content_type_uid=${e.data.data['content_type_uid']}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      console.log("DATA",data)
+    })
+    .catch((err) => {
+      console.log("err", err)
+    })
   });
   // window.addEventListener('message', handlePostMessage)
 
@@ -78,3 +81,5 @@ export const getStaticProps = async (context) => {
 };
 
 export default Home;
+
+
