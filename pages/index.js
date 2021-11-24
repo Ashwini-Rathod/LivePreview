@@ -20,8 +20,8 @@ function Home(props) {
       "*"
   );
   window.addEventListener("message",(e) => {
-    // console.log("TEST", e)
-    // console.log("DATA", e.data.data)
+    console.log("TEST", e)
+    console.log("DATA", e.data.data)
     if(e.data.data.hasOwnProperty('hash')){
       console.log("HERERERERER")
     }
