@@ -4,8 +4,6 @@ let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blt
 
 function Home(props) {
   useEffect(() => {
-    console.log("ref", ref.current, window)
-    
     window.parent.postMessage(
       {
           from: "live-preview",
@@ -37,15 +35,6 @@ function Home(props) {
     //   console.log("err", err)
     // })
   });
-  // window.addEventListener('message', handlePostMessage)
-
-  // if(ref.current) {
-  //   console.log("If")
-  //   ref.current.addEventListener('message', handlePostMessage)
-  //   // ref.current.addEventListener('click', (e) => {
-  //   //   console.log("click event ", e)
-  //   // })
-  // }
   }, [])
   return (
     <div>
