@@ -4,6 +4,9 @@ let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blt
 let testURL = `https://api.contentstack.io/v3/content_types/live_preview/entries/blte2be7187b7e7ee36?`
 
 function Home(props) {
+  const [title, setTitle] = useState(props.entry.entry['title'])
+  const [singleLine, setSingleLine] = useState(props.entry.entry['single_line'])
+  const [multi_line, setMultiLine] = useState(props.entry.entry['multi_line'])
   useEffect(() => {
     window.parent.postMessage(
       {
@@ -19,11 +22,8 @@ function Home(props) {
       "*"
   );
   window.addEventListener("message", async (e) => {
-    console.log("EVENT", e)
     const {data} = e.data
-    console.log("DATA", data)
     if(data.hasOwnProperty('hash')){
-      console.log("HERERERERER", data['hash'], data['content_type_uid'])
       let res = await fetch(`${testURL}live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`, {
         headers: {
           api_key: process.env.API_KEY,
@@ -31,7 +31,12 @@ function Home(props) {
         }
       })
       let entryData = await res.json()
-      console.log(entryData)
+      if(entryData){
+        setTitle(entryData.entry['title'])
+      setSingleLine(entryData.entry['single_line'])
+      setMultiLine(entryData.entry['multi_line'])
+      }
+      // console.log(entryData)
     }
    
   });
@@ -39,13 +44,13 @@ function Home(props) {
   return (
     <div>
       <Head>
-        <title>{props.entry.entry['title']}</title>
+        <title>{title}</title>
       </Head>
       <div >
         <div>
-          <h1>{props.entry.entry['single_line']}</h1>
+          <h1>{singleLine}</h1>
           <p>
-            {props.entry.entry['multi_line']}
+            {multi_line}
           </p>
         </div>
       </div>
