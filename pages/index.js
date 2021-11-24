@@ -5,12 +5,14 @@ let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blt
 function Home(props) {
   const ref = useRef();
   console.log("Props: ", props)
+  
+  const handlePostMessage = (e) => {
+    console.log("message event",e)
+  }
 
   useEffect(() => {
     console.log("ref", ref.current, window)
-    const handlePostMessage = (e) => {
-      console.log(e)
-    }
+    
     window.parent.postMessage(
       {
           from: "live-preview",
@@ -24,7 +26,13 @@ function Home(props) {
       },
       "*"
   );
-  if(ref.current) {ref.current.addEventListener('message', handlePostMessage)}
+  if(ref.current) {
+    console.log("If")
+    ref.current.addEventListener('message', handlePostMessage)
+    // ref.current.addEventListener('click', (e) => {
+    //   console.log("click event ", e)
+    // })
+  }
   }, [])
   return (
     <div ref ={ref}>
