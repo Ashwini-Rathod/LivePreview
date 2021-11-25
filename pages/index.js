@@ -4,13 +4,9 @@ let url = `https://cdn.contentstack.io/v3/content_types/live_preview/entries/blt
 let apiUrl = `https://api.contentstack.io/v3/content_types/live_preview/entries/blte2be7187b7e7ee36?`
 
 function Home(props) {
-  //defining states for all the fields available in a CT
-  const [title, setTitle] = useState(props.entry.entry['title'])
-  const [singleLine, setSingleLine] = useState(props.entry.entry['single_line'])
-  const [multi_line, setMultiLine] = useState(props.entry.entry['multi_line'])
-  const [para1, setPara1] = useState(props.entry.entry['paragraph_1'])
-  const [para2, setPara2] = useState(props.entry.entry['paragraph_2'])
-  const [para3, setPara3] = useState(props.entry.entry['paragraph_3'])
+  //defining states for the entry available in a CT
+  const [entry, setEntry] = useState(props.entry.entry)
+  const {title, single_line, multi_line, paragraph_1, paragraph_2, paragraph_3, file} = entry
 
   useEffect(() => {
     //initializing live preview when the page renders for the first time.
@@ -41,12 +37,7 @@ function Home(props) {
       let entryData = await res.json()
       //changing the states based on the data changed for that particular hash and rendering the same
       if(entryData){
-      setTitle(entryData.entry['title'])
-      setSingleLine(entryData.entry['single_line'])
-      setMultiLine(entryData.entry['multi_line'])
-      setPara1(entryData.entry['paragraph_1'])
-      setPara2(entryData.entry['paragraph_2'])
-      setPara3(entryData.entry['paragraph_3'])
+        setEntry(entryData.entry)
       }
     }
    
@@ -58,18 +49,18 @@ function Home(props) {
         <title>{title}</title>
       </Head>
       <div >
-        <h1  style={{textAlign: 'center'}}>{singleLine}</h1>
+        <h1  style={{textAlign: 'center'}}>{single_line}</h1>
         <div style={{margin: "auto", textAlign: 'center'}}>
-          <img src={props.entry.entry.file['url']} alt="wildlife" style={{width: '60%', height:"60%", marginBottom: "30px"}}/>
+          <img src={file['url']} alt="wildlife" style={{width: '60%', height:"60%", marginBottom: "30px"}}/>
         </div>
         <p style={{width: "70%", margin: 'auto'}}>
           {multi_line}
         </p>
         <div style={{margin: 'auto', paddingTop: "15px", width: "70%"}}>
           <ul >
-            <li style={{marginTop: '10px', marginBottom: '10px'}}>{para1}</li>
-            <li style={{marginTop: '10px', marginBottom: '10px'}}>{para2}</li>
-            <li style={{marginTop: '10px', marginBottom: '10px'}}>{para3}</li>
+            <li style={{marginTop: '10px', marginBottom: '10px'}}>{paragraph_1}</li>
+            <li style={{marginTop: '10px', marginBottom: '10px'}}>{paragraph_2}</li>
+            <li style={{marginTop: '10px', marginBottom: '10px'}}>{paragraph_3}</li>
           </ul>
         </div>
       </div>
