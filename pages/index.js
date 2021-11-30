@@ -26,6 +26,7 @@ function Home(props) {
   //listening to post messages for the hash value
   window.addEventListener("message", async (e) => {
     const {data} = e.data
+    //check for
     if(data.hasOwnProperty('hash')){
       //making an api call with the hash generated and content type uid
       let res = await fetch(`${apiUrl}live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`, {
@@ -91,4 +92,42 @@ export const getStaticProps = async (context) => {
 
 export default Home;
 
+// Enabling Live Preview using Contentstack's API:
+// 1. Create a Content Type with relevant fields.
+        // Create an entry, add/edit the content and publish the entry.
+        // Using Contentstack's API, render the contents of that particular entry on a page and host it on some external website
+  //2. Setting up for Live Preview:
+      // 1. Initialize live preview by sending a post message to the parent.
+        //     window.parent.postMessage(
+      // {
+    //     from: "live-preview",
+    //     type: "init",
+    //     data: {
+    //         config: {
+    //             shouldReload: false,
+    //             href: window.location.href,
+    //         },
+    //     },
+    // },
+    // "*")
 
+    // 2. Listen to the post messages for the incoming hash value
+    // window.addEventListener("message", async (e) => {
+    //   const {data} = e.data
+    //   //check for
+    //   if(data.hasOwnProperty('hash')){
+    //     //making an api call with the hash generated and content type uid
+    //     let res = await fetch(`${apiUrl}live_preview=${data['hash']}&content_type_uid=${data['content_type_uid']}`, {
+    //       headers: {
+    //         api_key: process.env.API_KEY,
+    //         access_token: process.env.DELIVERY_TOKEN
+    //       }
+    //     })
+    //     let entryData = await res.json()
+    //     //changing the states based on the data changed for that particular hash and rendering the same
+    //     if(entryData){
+    //       setEntry(entryData.entry)
+    //     }
+    //   }
+     
+    // });
